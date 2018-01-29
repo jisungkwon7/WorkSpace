@@ -1,0 +1,217 @@
+*conda virtural environment*
+ - conda env list (가상공간의 리스트들을 본다)
+
+ Scrapy
+ - scrapy genspider 이름 주소 =>|주소가 담긴 파이선 파일을 생성한다|
+ - activate env_scrapy |스크래피 가상공간|
+ - scrapy shell |스크래피 실행|
+ - scrapy crawl 이름 =>|'이름'.py 를 사용하여 데이터를 실행시킨다|:
+                      |실행 시키는 도중 /robots.txt가 나온다면
+  		      |setting.py으로 들어가서 ROBOTSTXT-OBEY=False으로 바꾼다
+
+ - //code note//
+  . fetch("<URL>")
+  . response =>|잘 연결되었는지 확인한다|
+  . response.xpath('//h1/a/text()').extract_first() -> 
+  . response.xpath('//*[@class="tag-item"]/a/text()').extract() 
+  . for i in a : i (정렬된 글자로 볼때)
+  . sel.xpath('/html/head/title').extract()
+    =:[<title>Title of the page</title>']
+  . sel.xpath('//title').extract()
+    =:[<title>Title of the page</title>']
+     ↑ |두가지의 코딩은 같은 하나의 <title>이 있을경우에만 가능하다. 
+       |여러가지 일 경우에는 한가지만 나오게  하지 못한다.예) text()
+  . sel.xpath('//p[순서]').extract() = sel.xpath('//p')[순서-1].extract()
+  . sel.xpath('//p/text()')[순서-1].extract()
+
+
+*html*
+ 
+
+*mysql*
+ - show databases (데이터베이스들의 리스트를 보여준다)
+ - CREATE DATABASE 이름 CHARACTER SET utf8 COLLATE utf8_general_ci;('이름'의 데이터베이스를 만든다 utf8)
+ - DROP DATABASE 이름 ('이름'의 데이터베이스를 지운다)
+ - use 이름 ('이름'의 데이터베이스를 사용한다)
+ - CREATE TABLE `이름`(
+   --------------------------------------------------
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `title` varchar(100) NON NULL,
+   `discription` text NOT NULL,
+   `author` varchar(30) NOT NULL,
+   `created` datetime NOT NULL,
+   PRIMARY KEY(id)
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+   --------------------------------------------------
+  - INSERT INTO `이름` (title, description, author, created) VALUES('about javascript', 'javascript is ~', 'egoing', '2015-04-10 12:20:05');
+  - SELECT * FROM 이름; (이름의 전체 테이블을 보여준다)
+  - SELECT id,title,author,created FROM 이름; (나열된 글자들의 테이블을 보여준다);
+  - SELECT id,title,author,created FROM 이름 ORDER BY id DESC; (id로 정렬을 한다);
+
+*git hub Atom to git-hub*
+ push data 
+ - git init
+ - git add
+ - git commit -m '<name>'
+ - git push
+
+ pull data
+ - git fetch --all
+ - git reset --hard <remote>/<branch_name>
+
+
+
+*python* - conda create -n python=3.5 anaconda 
+ [terminal.... C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe]
+ 
+ #If Statements
+  =. if 1<2:
+     elif
+     else     
+ #For Loops - 순서는 다르다.
+  - for ITEM in SEQ:
+  =. d = {"Sam":1,"Frank":2,"Dan":3}
+   . for k in d:
+         print(k)
+         print(d[k]) 
+      ->Sam
+        1
+        Frank
+        2
+        Dan
+        3      
+  =. out = num**2 for num in x]
+
+ #Whie Loops
+
+ #Range
+
+
+ #Number
+  - a[::-1] => 거꾸로 바꾸기 
+ #String
+  - mystring.upper()
+  - mystring.capitalize()
+  - mystring.split()
+  - "Item One: {} Item two: {}".format("dog","cat")
+  - "Item One: {x/y} Item two: {x/y}".format(x="dog",y="cat")
+ #List
+  - mylist.append("[]") => |앞의 mylist's elements + newlist
+  - mylist.extend("[]") => |앞의 mylist's elements + newlist's elements
+  - mylist.pop() => |가장 끝에있는 list element를 가져온다. 
+  - mylist.pop(숫자) => |list 순서대로 얻는다
+  - mylist.reverse()
+  - mylist.sort() => |순서배열
+  =. matrix = [[1,2,3],[4,5,6],[7,8,9]]
+   . first_col = [row[0] for row in matrix]
+      -> [1,4,7]
+ #Dictionaries
+  =. my_stuff = {"key1":"value", 'key2':'value2'}
+   . print(my_stuff['key2'])
+      -> 'value2'
+  =. my_stuff = {"key1":"value", 'key2':'value2',{'123':[1,2,'A']}}
+   . print(my_stuff['key']['123'][2])
+      -> 'A' 
+  =. my_stuff = {'lunch':'pizz','bfast':'eggs'}
+   . print(my_stuff['lunch'])
+      -> 'pizza'
+ #Booleans
+  -True,False,1,0
+ #Tuples
+  =. t = (1,2,3)
+   . print(t[0])
+      -> 1
+  =. t = ('a',True,123)
+   . print(t)
+      -> ('a', True, 123)
+  =. t[0] <- is not working
+  
+  =. mypairs = [(1,2),(3,4),(5,6)]
+   . for item in mypairs:
+   .    print(item)
+      -> (1,2)
+         (3,4)
+         (5,6)
+  =. mypairs = [(1,2),(3,4),(5,6)]
+   . for (tup1,tup2) in mypairs:
+   .     print(tup1)
+   .     print(tup2)
+      -> 1
+         2
+         3
+         4
+         5
+         6
+  =. mypairs = [(1,2),(3,4),(5,6)]
+   . for (tup2,tup1) in mypairs:
+   .     print(tup2)
+   .     print(tup1)
+      -> 2
+         1
+         4
+         3
+         6
+         5
+
+
+ #Sets  is unique
+  =. x = set()
+   . x.add(1)
+   . x.add(2)
+   . x.add(4)
+   . x.add(0.1)
+   . print(x)
+      -> {0.1, 1, 2, 4}
+  =. x = set()
+   . x.add(1)
+   . x.add(2)
+   . x.add(4)
+   . x.add(4)
+   . print(x)
+      -> {1, 2, 4}
+  =. converted = set([1,1,1,1,2,2,2,3,3,3,3])
+   . print(converted)
+      -> {1, 2, 3}
+
+
+ #Control Flow
+  =. 1>=1
+   . 1<=4
+   . 1==1
+   . 1=="1" ->F
+   . 'hi == 'bye'  ->F 
+  - and, or
+
+
+ #Functions
+  - def my_func(param1='default')
+    """
+    aaa
+    """     <== 함수 설명문
+
+ #Lambda
+  =. mylist = [1,2,3,4,5,6,7,8]
+   . def even_bool(num):
+         return num%2 == 0
+
+   . evens = filter(even_bool,mylist)
+   . print(evens)
+                  ||
+  =. mylist = [1,2,3,4,5,6,7,8]
+   . evens = filter(lambda num:num%2 == 0,mylist)
+   . print(list(evens))
+ 
+ #Split
+  =. tweet = "Go Sports! #Sports"
+   . result = tweet.split('#')[1]
+       -> Sports
+ 
+ #in Operator
+  =. 'x' in [1,2,3,x]   -> T
+  =. 'x' in [1,2,3]   -> F
+
+
+
+
+
+
