@@ -1,7 +1,15 @@
 *conda virtural environment*
  - conda env list (가상공간의 리스트들을 본다)
+ - conda create --name DjangoEnv python=3.5 
+ - conda remove --name
+a
+*Django*
+ - conda install django
+ - django-admin
+ - django-admin startproject 이름
+ - python manage.py startapp first_app
 
- Scrapy
+*Scrapy*
  - scrapy genspider 이름 주소 =>|주소가 담긴 파이선 파일을 생성한다|
  - activate env_scrapy |스크래피 가상공간|
  - scrapy shell |스크래피 실행|
@@ -27,7 +35,7 @@
 
 *html*
  
-
+s
 *mysql*
  - show databases (데이터베이스들의 리스트를 보여준다)
  - CREATE DATABASE 이름 CHARACTER SET utf8 COLLATE utf8_general_ci;('이름'의 데이터베이스를 만든다 utf8)
