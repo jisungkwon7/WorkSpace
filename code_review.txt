@@ -2,13 +2,45 @@
  - conda env list (가상공간의 리스트들을 본다)
  - conda create --name DjangoEnv python=3.5 
  - conda remove --name
-a
+
 *Django*
  - conda install django
- - django-admin
- - django-admin startproject 이름
- - python manage.py startapp first_app
+ - django-admin startproject 이름project
+ - cd 이름project
+ - python manage.py startapp 이름app(폴더)
  - python manage.py manage.py runserver 
+ IN ATOM
+|   views.py (app)
+|      from django.shortcuts import render
+|      from django.http import HttpResponse
+|      # Create your views here.
+|
+|      def index(request):
+|          return HttpResponse("<em>My Second Project</em>")
+|
+|
+|   urls.py (project)
+|      from django.conf.urls import url
+|      from django.contrib import admin
+|      from 이름app(폴더) import views
+|
+|      urlpatterns = [
+|          url(r'^$', views.index, name = 'index'),  #views.py 로 가는것
+|          url(r'^admin/', admin.site.urls),
+|      ]
+|   setting.py
+|      INSTALLED_APPS = [
+|          'django.contrib.admin',
+|          'django.contrib.auth',
+|          'django.contrib.contenttypes',
+|          'django.contrib.sessions',
+|          'django.contrib.messages',
+|          'django.contrib.staticfiles',
+|          '이름app'
+|      ]
+-------------------------------
+
+
 
 *Scrapy*
  - scrapy genspider 이름 주소 =>|주소가 담긴 파이선 파일을 생성한다|
