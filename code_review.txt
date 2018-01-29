@@ -8,6 +8,7 @@ a
  - django-admin
  - django-admin startproject 이름
  - python manage.py startapp first_app
+ - python manage.py manage.py runserver 
 
 *Scrapy*
  - scrapy genspider 이름 주소 =>|주소가 담긴 파이선 파일을 생성한다|
