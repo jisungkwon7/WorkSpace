@@ -153,6 +153,7 @@ ATOM-help
  - os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),"이름(폴더)")
 
 *Scrapy*
+ - scrapy startproject quotes_spider
  - scrapy genspider 이름 주소 =>|주소가 담긴 파이선 파일을 생성한다|
  - activate env_scrapy |스크래피 가상공간|
  - scrapy shell |스크래피 실행|
@@ -167,15 +168,18 @@ ATOM-help
   . response.xpath('//*[@class="tag-item"]/a/text()').extract() 
   . for i in a : i (정렬된 글자로 볼때)
   . sel.xpath('/html/head/title').extract()
-    =:[<title>Title of the page</title>']
+    =:[<title>Title of the page</title>']   =>|selector
   . sel.xpath('//title').extract()
     =:[<title>Title of the page</title>']
      ↑ |두가지의 코딩은 같은 하나의 <title>이 있을경우에만 가능하다. 
        |여러가지 일 경우에는 한가지만 나오게  하지 못한다.예) text()
   . sel.xpath('//p[순서]').extract() = sel.xpath('//p')[순서-1].extract()
   . sel.xpath('//p/text()')[순서-1].extract()
+  . sel.xpath('//h2/a/@href').extract()     
+                  ->['#']
 
-
+  . scrapy list =>|스크레피 리스트를 본다
+  . scrapy crawl 이름(예:quotes)
 *html*
  
 s
@@ -209,7 +213,7 @@ s
  pull data
  - git fetch --all
  - git reset --hard <remote>/<branch_name>
-
+ - git pull
 
 
 *python* - conda create -n python=3.5 anaconda 
