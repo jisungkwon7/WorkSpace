@@ -113,10 +113,6 @@ ATOM-help
 |      helpdict = {'help_insert':'HELP PAGE'}
 |      return render(request,'apptwo/help.html',context=helpdict)
 |
-
-|
-|
-|
 |
 ---------------------------------------------------
 |   views.py (app)
@@ -180,6 +176,17 @@ ATOM-help
 
   . scrapy list =>|스크레피 리스트를 본다
   . scrapy crawl 이름(예:quotes)
+
+  . response.xpath('//*[@class="quotes"]')
+  . quotes = response.xpath('//*[@class="quotes"]')
+  . quote = quotes[0]
+  . print(quote.xpath('.//*[@class="text"]/text()').extract_first())
+  . print(quote.xpath('//*[@class="text"]/text()').extract()) -> 모든 quote의 텍스트를 불러온다
+  . quote.xpath('.//*[@itemprop = "keywords"]/@content').extract_first()  ->전체 Array 가 하나로 묶여있따
+  . response.xpath('//*[@class = "next"]/a/@href').extract_first()
+ - next_page_url = response.xpath('//*[@class = "next"]/a/@href').extract_first()
+ - absolute_next_page_url = response.urljoin(next_page_url)
+ - yield scrapy.Request(absolute_next_page_url) 
 *html*
  
 s
