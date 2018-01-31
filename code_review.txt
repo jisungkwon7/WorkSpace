@@ -184,9 +184,11 @@ ATOM-help
   . print(quote.xpath('//*[@class="text"]/text()').extract()) -> 모든 quote의 텍스트를 불러온다
   . quote.xpath('.//*[@itemprop = "keywords"]/@content').extract_first()  ->전체 Array 가 하나로 묶여있따
   . response.xpath('//*[@class = "next"]/a/@href').extract_first()
+  . scrapy crawl quotes -o items.csv 
  - next_page_url = response.xpath('//*[@class = "next"]/a/@href').extract_first()
  - absolute_next_page_url = response.urljoin(next_page_url)
  - yield scrapy.Request(absolute_next_page_url) 
+ 
 *html*
  
 s
