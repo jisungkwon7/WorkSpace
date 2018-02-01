@@ -188,7 +188,7 @@ ATOM-help
  - next_page_url = response.xpath('//*[@class = "next"]/a/@href').extract_first()
  - absolute_next_page_url = response.urljoin(next_page_url)
  - yield scrapy.Request(absolute_next_page_url) 
- 
+ - scrapy crawl quotes -s DOWNLOAD_DELAY=5  =>|속도를 느리게 하여 사람인것처럼 가장함
 *html*
  
 s

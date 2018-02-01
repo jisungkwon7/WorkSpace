@@ -8,12 +8,7 @@
 import scrapy
 
 
-class QuotesSpiderItem(scrapy.Item):
+class BooksCrawlerItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    h1_tag = scrapy.Field()
-    tags = scrapy.Field()
-
-    # text = scrapy.Field()
-    # author = scrapy.Field()
-    # tags_q = scrapy.Field()
+    pass
