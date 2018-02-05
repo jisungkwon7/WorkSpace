@@ -1,7 +1,7 @@
 *conda virtural environment*
  - conda env list (가상공간의 리스트들을 본다)
  - conda create --name DjangoEnv python=3.5 
- - conda remove --name
+ - conda-env remove --name
 
 *Django*
  - conda install django
