@@ -1,4 +1,4 @@
-"""protwo URL Configuration
+"""ProTwo URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import include
-from apptwo import views
+from AppTwo import views
 
 urlpatterns = [
-    url(r'^$', views.index, name ='index'),
-    url(r'^index/',include('apptwo.urls')),
-    url(r'^help/', include('apptwo.urls')),
+    url(r'^$',views.index,name='index'),
+    url(r'^index/',include('AppTwo.urls')),
+    url(r'^help/',include('AppTwo.urls')),
     url(r'^admin/', admin.site.urls),
 ]

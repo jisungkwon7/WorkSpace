@@ -1,0 +1,118 @@
+
+A Django Project is collection of applications and configuration
+when combined together will make up the full web application.
+Web Framework: Django witll be able to inject content into the HTML
+Can use Python code to inject content from a database.
+
+
+ - activate DjangoEnv
+ - django-admin startproject first_project
+ - python manage.py startapp first_app
+ - python manage.py runserver
+
+
+
+first_app
+ migrations : directory stores database specific information as it related to the models
+ __init__.py : Blanck Python script, treating as a package
+ admin.py : can register the models here/ then use them with Django's admin interface.
+ apps.py : can place application specific configuration
+ models.py : store application's data models
+ tests.py : store functions & test applictaion
+ views.py : handles requests and return response
+first_project
+ __init__.py : Blanck Python script, treating as a package
+ settings.py : Storing all of the project settings
+ urls.py : Storing all the URL patters of the project/ Different pages of the web application
+ wsgi.py : Acting as the Web Server Gateway Interface/ help deplying the web app to production
+manage.py : associateing with many commands.
+
+
+
+Class:Django_Application(very direct mapping from the views.py to the urls.py)
+ project/settings.py 
+  INSTALLED_APPS - string application/ what we need to do is adding own application
+ app/views.py
+  . from django.shortcuts import render
+  . from django.http import HttpResponse   => import http modulse
+  .
+  . def index(request):
+  .	return HttpResponse("Hello World!")  => HttpResponse the Hello World/ pass to HTML
+ project/ulrs.py ->mapping app views
+  . from django.conf.urls import url
+  . from django.contrib import admin
+  . form first_app import views
+  .
+  . urlpatterns = [
+  . 	url(r'^$',views.index,name='index'),
+  .	url(r'^admin/', admin.site.urls),
+
+Class:URL_Mappings(include()function from django.onf.urls)
+->the include() function allows to look for a match with regular expresions 
+->and link back to application's own ulrs.py file. Make url pattern
+ project/ulrs.py -mapping app views
+  . from django.conf.urls import url
+  . from django.contrib import admin
+  . from django.conf.urls import include
+  . form first_app import views
+  .
+  . urlpatterns = [
+  . 	url(r'^$',views.index,name='index'),
+  .	url(r'^first_app/',include(first_app.urls)),
+  .	url(r'^admin/', admin.site.urls),
+
+ app/ulrs.py -mapping app views
+  . from django.conf.urls import url
+  . form first_app import views
+  .
+  . urlpatterns = [
+  .	url(r'^admin/', admin.site.urls),
+
+Class:Tamplates(how to connect templates with models so can display data created dynamically.
+-> do not have to 'hard-coded' path
+ project/settings.py
+  . BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file)))
+  . TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+
+  . TEMPLATES = [
+  . 	{
+  .		'DIRS':[TEMPLATE_DIR,],
+                 ....
+  .	}
+  .]
+ template/index.html
+ project/settings.py 
+  INSTALLED_APPS - string application/ what we need to do is adding own application
+ project/views.py
+  . from django.shortcuts import render
+  . from django.http import HttpResponse   => import http modulse
+  .
+  . def index(request):
+  .     my_dict = {'insert_me':"Hello I am from views.py!"}
+  .     return render(request,'first_app/index.html',context=my_dict)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
