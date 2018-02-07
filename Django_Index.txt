@@ -4,6 +4,7 @@ when combined together will make up the full web application.
 Web Framework: Django witll be able to inject content into the HTML
 Can use Python code to inject content from a database.
 
+-- Django Level One --
 
  - activate DjangoEnv
  - django-admin startproject first_project
@@ -26,6 +27,12 @@ first_project
  urls.py : Storing all the URL patters of the project/ Different pages of the web application
  wsgi.py : Acting as the Web Server Gateway Interface/ help deplying the web app to production
 manage.py : associateing with many commands.
+static
+ images
+ 
+templates
+ first_app
+  index.html
 
 
 
@@ -91,16 +98,141 @@ Class:Tamplates(how to connect templates with models so can display data created
   .     my_dict = {'insert_me':"Hello I am from views.py!"}
   .     return render(request,'first_app/index.html',context=my_dict)
 
+Class: Static files
+project/settings.py
+  . BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+  . TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
+  . STATIC_DIR = os.path.join(BASE_DIR,"static")
+
+  . STATIC_URL = '/static/'
+  . STATICFILES_DIRS = [
+  . 	STATIC_DIR,
+  . ]
+templates/first_app/index.html
+  . <!DOCTYPE html>
+  . {% load staticfiles %}     => load image
+  . <html>
+  . ...
+  . <head>
+  . ...
+  . <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>    => load css
+  . ...
+  . </head>
+  . ...
+  . <body>
+  . ...
+  . <img src"{%static "images/babypic.jpg" %}" alt="Uh Oh, did not show">
+  . ...
+  . </body>
+  . </html>
 
 
+-- Django Level Two --
+Class: Creating Models
+app
+ models.py
+  . from django.db import models
+  . 
+  . class Topic(models.Model):
+  .     top_name = models.CharField(max_lenght=264,unique=True)
+  . 
+  .     def __str__(self):
+  .         return self.top_name
+  . 
+  . class Webpage(models.Model):
+  .     topic = models.ForeignKey(Topic)
+  .     name = models.CharField(max_lenght=264,unique=True)
+  .     url = models.URLField(unique=True)
+  . 
+  .     def __str__(self):
+  .         return self.name
+  . 
+  . class AccessRecord(models.Model):
+  .     name = models.ForeignKey(Webpage)
+  .     date = models.DateField()
+  . 
+  .     def __str__(self):
+  .         return str(self.date)
 
+ - python manage.py migrate
+ - python manage.py makemigrations first_app
+ - python manage.py migrate
+     => connected to SQLdatabase.
+ - python manage.py shell => test whether connected or not
+ >>> from first_app.models import Topic
+ >>> print(Topic.objects.all())
+ >>> t = Topic(top_name="Social Network")
+ >>> t.save()
+ >>> print(Topic.objects.all())
+ >>> quit()
 
+app
+ admin.py
+  . from django.contrib import admin
+  . from first_app.models import AccessRecord,Topic,Webpage
+  . 
+  . admin.site.register(AccessRecord)
+  . admin.site.register(Topic)
+  . admin.site.register(Webpage)
 
+ - python manage.py createsuperuser
 
+Class: Population Script
+ - pip install Faker
 
+populate_first_app.py
+  . import os
+  . os.environ.setdefault('DJANGO_SETTINGS_MODULE','first_project.settings')
+  . 
+  . import django
+  . django.setup()
+  . 
+  . ## FAKE POP SCRIPT
+  . import random
+  . from first_app.models import AccessRecord,Webpage,Topic
+  . from faker import Faker
+  . 
+  . fakegen =Faker()
+  . topic = ['Search','Social','Marketplace','News','Games']
+  . 
+  . def add_topic():
+  .     t = Topic.objects.get_or_create(top_name=random.choice(topic))[0]
+  .     t.save()
+  .     return t
+  . 
+  . def populate(N=5):
+  . 
+  .     for entry in range(N):
+  .         # get the topic for the entry
+  .         top=add_topic()
+  . 
+  .         #Create the fakedate for that entry
+  .         fake_url =fakegen.url()
+  .         fake_date = fakegen.date()
+  .         fake_name = fakegen.company()
+  . 
+  .         # Create the new webpage entry
+  .         webpg = Webpage.objects.get_or_create(topic=top,url=fake_url,name=fake_name)[0]
+  . 
+  .         # create a fake access record for that Webpage
+  .         acc_rec = AccessRecord.objects.get_or_create(name=webpg,date=fake_date)[0]
+  . 
+  . if __name__ == '__main__':
+  .     print("population script!")
+  .     populate(20)
+  .     print("populating complete!")
 
+ - python populate_first_app.py
+    => check webpage
 
-
+Class: Models-Templates-Views Paradigm
+->Models, views, and templates serve dynamic contents to a 
+->user based on them
+ 1.First: Views.py-import any modes 
+ 2.Second: Use the views to query the model for data
+ 3.Third: Pass results from the models to the template
+ 4.Fourth:Edidt template so that it is ready to accept and display the data from the model
+ 5.Fith: Map a URL to the view
 
 
 

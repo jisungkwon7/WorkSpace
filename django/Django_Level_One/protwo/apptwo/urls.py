@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from AppTwo import views
+from apptwo import views
 
 urlpatterns = [
-    url(r'^$',views.help,name='index'),
+    url(r'^$',views.help,name='help'),
 ]
