@@ -191,14 +191,14 @@ populate_first_app.py
   . import random
   . from first_app.models import AccessRecord,Webpage,Topic
   . from faker import Faker
-  . 
-  . fakegen =Faker()
-  . topic = ['Search','Social','Marketplace','News','Games']
-  . 
-  . def add_topic():
-  .     t = Topic.objects.get_or_create(top_name=random.choice(topic))[0]
-  .     t.save()
-  .     return t
+   . 
+   . fakegen =Faker()
+   . topic = ['Search','Social','Marketplace','News','Games']
+   . 
+   . def add_topic():
+   .     t = Topic.objects.get_or_create(top_name=random.choice(topic))[0]
+   .     t.save()
+   .     return t
   . 
   . def populate(N=5):
   . 
@@ -244,85 +244,48 @@ app/views.py
   .     date_dict = {'access_records':webpages_list}
   .     return render(request,'first_app/index.html',context=date_dict)
 templates/first_app/index.html
-  . <!DOCTYPE html>
-
-  . {% load staticfiles %}
-
-  . <html lang="en">
-
-  .   <head>
-
-  .     <meta charset="UTF-8">
-
-  .     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  .     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  .     <title>Django Level Two</title>
-
-  .     <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
-
-  .   </head>
-
-  .   <body>
-
-  .     <hi>Hi welcom to Django Level two!</hi>
-
-  .     <h2>Here are your acces records:</h2>
-
-  . 
-
-  .     <div class="djangtwo">
-
-  .       {% if access_records %}
-
-  .         <table>
-
-  .           <thead>
-
-  .             <th>Site Name</th>
-
-  .             <th>Date Accessed</th>
-
-  .           </thead>
-
-  .           {% for acc in access_records %}
-
-  .           <tr>
-
-  .             <td>{{ acc.name }}</td>
-
-  .             <td>{{ acc.date }}</td>
-
-  .           </tr>
-
-  .           {% endfor %}
-
-  .         </table>
-
-  .         {% else %}
-
-  .           <p>NO ACCESS RECORDS FOUND!</p>
-
-  .         {% endif %}
-
-  .     </div>
-
-  . 
-
-  .   </body>
-
-  . </html>
-
-static/css/mystyle.css
-  . h1{
-  .   color: red;
-  . }
-
-  . table, th, td{
-  .   border: 2px solid black
-  . }
-
+ . <!DOCTYPE html>
+ . {% load staticfiles %}
+ . <html lang="en">
+ .   <head>
+ .     <meta charset="UTF-8">
+ .     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ .     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ .     <title>Django Level Two</title>
+ .     <link rel="stylesheet" href="{% static "css/mystyle.css" %}"/>
+ .   </head>
+ .   <body>
+ .     <hi>Hi welcom to Django Level two!</hi>
+ .     <h2>Here are your acces records:</h2>
+ . 
+ .     <div class="djangtwo">
+ .       {% if access_records %}
+ .         <table>
+ .           <thead>
+ .             <th>Site Name</th>
+ .             <th>Date Accessed</th>
+ .           </thead>
+ .           {% for acc in access_records %}
+ .           <tr>
+ .             <td>{{ acc.name }}</td>
+ .             <td>{{ acc.date }}</td>
+ .           </tr>
+ .           {% endfor %}
+ .         </table>
+ .         {% else %}
+ .           <p>NO ACCESS RECORDS FOUND!</p>
+ .         {% endif %}
+ .     </div>
+ . 
+ .   </body>
+ . </html>
+ static/css/mystyle.css
+ . h1{
+ .   color: red;
+ . }
+ . table, th, td{
+ .   border: 2px solid black
+ . } 
 
 
 
