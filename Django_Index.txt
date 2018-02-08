@@ -288,11 +288,64 @@ templates/first_app/index.html
  . } 
 
 
+-- Django Level Three --
+Class: Django Forms
 
+app
+ forms.py
+  . from django import forms
+  . 
+  . class FormName(forms.Form):
+  .     name = forms.CharField()
+  .     email = forms.EmailField()
+  .     text = forms.CharField(widget=forms.Textarea)
 
-
-
-
+app
+ views.py
+  . from django.shortcuts import render
+  . from . import forms
+  . 
+  . 
+  . def index(request):
+  .     return render(request,'basicapp/index.html')
+  . 
+  . def form_name_view(request):
+  . 
+  .     if request.method == 'POST':
+  .         form = forms.FormName(request.POST)
+  . 
+  .         if form.is_valid():
+  .             # DO SOMETHING CODE
+  .             print("VALIDATION SUCCESS")
+  .             print("NAME: "+form.cleaned_data['name'])
+  .             print("EMAIL: "+form.cleaned_data['email'])
+  .             print("TEXT: "+form.cleaned_data['text'])
+  . 
+  .     return render(request,'basicapp/form_page.html',{'form':form})
+form
+ urls.py
+  . from django.conf.urls import url
+  . from django.contrib import admin
+  . from basicapp import views
+  . 
+  . urlpatterns = [
+  .     url(r'^$', views.index,name='index'),
+  .     url(r'^admin/', admin.site.urls),
+  .     url(r'^formpage/', views.form_name_view,name='form_name')
+  . ]
+form_page.html
+  .     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  .      ...
+  .   <body>
+  .     <h1>Fill out the form!</h1>
+  .     <div class="container">
+  .       <form method="POST">
+  .           {{form.as_p}}
+  .           {% csrf_token %}
+  .         <input type="submit" class="btn btn-primary" value="Submit">
+  .       </form>
+  .     </div>
+  .   </body>
 
 
 
