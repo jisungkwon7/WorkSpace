@@ -390,19 +390,64 @@ templates/users.html
   . ...
 
 
+ -- Django Level Four --
+Class: Relative URLs with Templates
+
+app/urls.py
+  . from django.conf.urls import url
+  . from . import views
+  . 
+  . #TEMPLATE TAGGING
+  . app_name = 'basic_app'
+  . 
+  . urlpatterns = [
+  .     url(r'^relative/$',views.relative,name='relative'),
+  .     url(r'^other/$',views.other,name='other'),
+  . ]
+
+project/urls.py
+  . from django.conf.urls import url, include
+  . from django.contrib import admin
+  . from basic_app import views
+  . 
+  . urlpatterns = [
+  .     url(r'^$',views.index,name='index'),
+  .     url(r'^admin/', admin.site.urls),
+  .     url(r'^basic_app/',include('basic_app.urls')),
+  . ]
+
+templates/basic_app/relative_url_templates.py
+  .   <body>
+  .     <h1>WELCOME TO RELATIVE URL TEMPLATES</h1>
+  .     <a href="{% url 'basic_app:other' %}">THE OTHER PAGE</a>
+  .     <a href="{% url 'admin:index' %}">LINK TO ADMIN</a>
+  .     <a href="{% url 'index' %}">LINK TO INDEX</a>
+  .     <!-- no space between the two colums -->
+  .   </body>
+
+Class: Template Filters and Custom Filters
+templates/basic_app/base.html
+  .     <div class="container">
+  .       {% block body_block %}
+  .       <!-- Anything outside of this will be inherited if you extend! -->
+  .       {% endblock %}
+  .     </div>
 
 
+Class: Template Filters Coding Example
+app/views.py
+  . def index(request):
+  .     context_dict = {'text':'hello world','number':100}
+  .     return render(request,'basic_app/index.html',context_dict)
 
-
-
-
-
-
-
-
-
-
-
+templates/basic_app/index.html
+  . <!DOCTYPE html>
+  . {% extends "basic_app/base.html" %}
+  .   {% block body_block %}
+  .     <h1>WELCOME TO INDEX</h1>
+  .     <h1>{{ text|cut:'world' }}</h1>
+  .     <h1>{{ number|add:"99" }}</h1>
+  .   {% endblock %}
 
 
 
