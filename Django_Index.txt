@@ -369,6 +369,53 @@ app
   .             raise forms.ValidationError("MAKE SURE EMAILS MATCH!")
 
 
+Class: Model Fomrs Exercise
+
+protwo/apptwo/form.py
+  . from django import forms
+  . from .models import User
+  . 
+  . class NewUserForm(forms.ModelForm):
+  .     class Meta():
+  .         model = User
+  .         fields = '__all__'
+
+templates/users.html
+  . ...
+  .       <form method="POST">
+  .           {{ form.as_p }}
+  .           {% csrf_token %}
+  .           <input type="submit" class='btn btn-primary' value="Submit">
+  .       </form>
+  . ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
