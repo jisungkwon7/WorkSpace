@@ -300,8 +300,7 @@ app
   .     email = forms.EmailField()
   .     text = forms.CharField(widget=forms.Textarea)
 
-app
- views.py
+app/views.py
   . from django.shortcuts import render
   . from . import forms
   . 
@@ -322,8 +321,7 @@ app
   .             print("TEXT: "+form.cleaned_data['text'])
   . 
   .     return render(request,'basicapp/form_page.html',{'form':form})
-form
- urls.py
+form/urls.py
   . from django.conf.urls import url
   . from django.contrib import admin
   . from basicapp import views
@@ -457,6 +455,84 @@ Class: Django Passwords
  :-> pip install bcrypt
  :-> pip install django[argon2]
 
+project/settings
+-------------------------------------
+  . PASSWORD_HASHERS =[
+  .     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+  .     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+  .     'django.contrib.auth.hashers.Argon2PasswordHasher',
+  .     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+  .     'django.contrib.auth.hashers.BCryptPasswordHasher', 
+  . ]
+-------------------------------------
+
+  . AUTH_PASSWORD_VALIDATORS = [
+  .     {
+  .         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+  .     },     # cannot use password inside of Username
+  .     {
+  .         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+  .     },
+  .     {
+  .         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+  .     },
+  .     {
+  .         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+  .     },     # make sure it has number in password
+  . ]
+
+
+
+¤·pip install pillow
+¤·pip install pillow --global-option="build_ext" --global-option="--disable-jpeg"
+ 
+Class: Coding User Models and Forms
+ app/models.py
+  . from django.db import models
+  . from django.contrib.auth.models import User
+  . # Create your models here.
+  . 
+  . class UserProfileInfo(models.Model):
+  . 
+  .     user = models.OneToOneField(User)
+  . 
+  .     # additional
+  .     protfolio_site = models.URLField(blank=True)
+  . 
+  .     profile_pic = models.ImageField(upload_to='profile_pics',blank=True) #user does not need to provide picture
+  . 
+  .     def __str__(self):
+  .         return self.user.username
+ app/forms.py
+  . from django import forms
+  . from django.contrib.auth.models import User
+  . from .models import UserProfileInfo
+  . 
+  . class UserForm(forms.ModelForm):
+  .     password = forms.CharField(widget=forms.PasswordInput())
+  . 
+  .     class Meta():
+  .     model = ('username','email','password')
+  . 
+  . class UserProfileInfo(forms.ModelForm):
+  .     class Meta():
+  .         model = UserProfileInfo
+  .         fields = ('portfolio_site','poortfile_pic')
+ app/admin.py
+  . from django.contrib import admin
+  . from .models import UserProfileInfo
+  . # Register your models here.
+  . admin.site.register(UserProfileInfo)
+ project/urls.py
+  . from django.conf.urls import url
+  . from django.contrib import admin
+  . from basic_app import views
+  . 
+  . urlpatterns = [
+  .     url(r'^$', views.index,name='index'),
+  .     url(r'^admin/', admin.site.urls),
+  .     url(r'^basic_app/',include('basic_app.urls')),
+  . ]
 
 
 
