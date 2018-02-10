@@ -449,7 +449,13 @@ templates/basic_app/index.html
   .     <h1>{{ number|add:"99" }}</h1>
   .   {% endblock %}
 
+ -- Django Level Five --
+Class: Django Passwords
+ -> apps "djngo.contrib.auth" & "django.contrib.contenttypes" will be used
+ -> Never store passwords as plain text! but using the default PBKDF2 algorithm with SHA256 hash.
 
+ :-> pip install bcrypt
+ :-> pip install django[argon2]
 
 
 
