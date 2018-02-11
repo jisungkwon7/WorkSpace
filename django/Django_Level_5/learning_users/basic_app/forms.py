@@ -6,9 +6,10 @@ class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta():
-    model = ('username','email','password')
+        model = User
+        fields = ('username','email','password')
 
-class UserProfileInfo(forms.ModelForm):
+class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('portfolio_site','poortfile_pic')
+        fields = ('portfolio_site','profile_pic')
