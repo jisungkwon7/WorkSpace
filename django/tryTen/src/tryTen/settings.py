@@ -16,6 +16,11 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(os.path.dirname(BASE_DIR),"static","static")
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jisungkwon7@gmail.com'
+EMAIL_HOST_PASSWORD = 'coolguys207'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -38,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles'
+    'profiles',
+    'contact',
 ]
 
 MIDDLEWARE = [
