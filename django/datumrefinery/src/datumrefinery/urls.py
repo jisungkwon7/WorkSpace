@@ -17,15 +17,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
-from blogframe import views
+from blogframe import views as FrameViews
+# from blogpost import views as PostViews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.index, name='index'),
-    url(r'^about/', views.about, name='about'),
-    url(r'^population/world/', views.worldpopulation, name='worldpopulation'),
-    url(r'^population/korea/', views.koreanpopulation, name='koreanpopulation'),
-    url(r'',include('blogframe.urls')),
+    url(r'^$',FrameViews.index, name='index'),
+    url(r'^about/', FrameViews.about, name='about'),
+    url(r'^population/world/', FrameViews.worldpopulation, name='worldpopulation'),
+    url(r'^population/korea/', FrameViews.koreanpopulation, name='koreanpopulation'),
+
+    # url(r'',include('blogpost.urls')),
 ]
 
 if settings.DEBUG:
