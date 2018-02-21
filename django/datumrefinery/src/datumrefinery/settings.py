@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'profiles'
+    'blogframe'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +129,5 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 MEDIA_URL ='/media/'
+
+LOGIN_REDIRECT_URL = '/'

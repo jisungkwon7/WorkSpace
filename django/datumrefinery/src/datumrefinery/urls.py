@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from profiles import views
+from blogframe import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^about/', views.about, name='about'),
     url(r'^population/world/', views.worldpopulation, name='worldpopulation'),
     url(r'^population/korea/', views.koreanpopulation, name='koreanpopulation'),
+    url(r'',include('blogframe.urls')),
 ]
 
 if settings.DEBUG:
