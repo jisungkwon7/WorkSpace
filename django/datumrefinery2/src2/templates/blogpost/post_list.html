@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  {% for post in post_list %}
+    <header id="showcase" class="grid">
+      <div class ="content-wrap">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title ng-binding"><strong>Published on |</strong>
+            {{ post.published_date|date:"D M Y"}}</h3>
+          </div>
+          <div class="panel-body">
+            <div>
+              <h4><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h4>
+              <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  {% endfor %}
+{% endblock %}

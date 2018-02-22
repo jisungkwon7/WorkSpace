@@ -3,8 +3,8 @@ from . import views
 
 
 urlpatterns = [
-    # url(r'^$',views.PostListView.as_view(),name='post_list'),
-    url(r'^articles/$',views.ArticleListView.as_view(),name='article_list'),
+    url(r'^$',views.PostListView.as_view(),name='article_list'),
+    url(r'^articles/$',views.ArticleListView.as_view(),name='post_list'),
     url(r'^aboutview/$',views.AboutView.as_view(),name='aboutview'),
     url(r'^post/(?P<pk>\d+)$', views.PostDetailView.as_view(), name='post_detail'),
     url(r'^post/new/$', views.CreatePostView.as_view(), name='post_new'),

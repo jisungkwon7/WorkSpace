@@ -19,9 +19,9 @@ DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR,"templates")
 if DEBUG:
-    STATIC_DIR = os.path.join(BASE_DIR,"static","static")
-    STATIC_ROOT = os.path.join(BASE_DIR,"static","static_only")
-    MEDIA_ROOT = os.path.join(BASE_DIR,"static","media")
+    STATIC_DIR = os.path.join(BASE_DIR,"static")
+    # STATIC_ROOT = os.path.join(BASE_DIR,"static","static_only")
+    # MEDIA_ROOT = os.path.join(BASE_DIR,"static","media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/

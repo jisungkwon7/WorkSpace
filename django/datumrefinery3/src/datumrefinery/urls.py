@@ -22,7 +22,7 @@ from blogframe import views as frameviews
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',frameviews.index, name='index'),
+    # url(r'^$',frameviews.index, name='index'),
     url(r'^about/', frameviews.about, name='about'),
     url(r'^population/world/', frameviews.worldpopulation, name='worldpopulation'),
     url(r'^population/korea/', frameviews.koreanpopulation, name='koreanpopulation'),
