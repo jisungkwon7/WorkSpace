@@ -3,6 +3,10 @@
  - conda create --name DjangoEnv python=3.5 
  - conda-env remove --name
 
+*DataEnv*
+ - conda update jupyter
+ - jupyter notebook
+
 *Django*
  - conda install django
  - django-admin startproject ¿Ã∏ßproject
